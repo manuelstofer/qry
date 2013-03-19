@@ -124,11 +124,7 @@ function createQuery (query) {
     }
 }
 
-function isEqualQuery (query) {
-    return query instanceof Array || typeof query !== 'object' || query instanceof RegExp;
-}
-
-function isEqual (data, query) {
+function match (data, query) {
 
     if (query instanceof RegExp) {
         return query.test(data);
@@ -144,28 +140,23 @@ function isEqual (data, query) {
         }
         return true;
     }
-    return query === data;
-}
 
-function match (data, query) {
+    if (typeof query === 'object') {
+        for (var key in query) {
+            var fnName = key;
 
-    if (isEqualQuery(query)){
-        return isEqual(data, query);
-    }
-
-    for (var key in query) {
-        var fnName = key;
-
-        if (fnName in fn) {
-            if (!fn[fnName](data, query[key], query)) {
-                return false;
-            }
-        } else {
-            if (!match(data[key], query[key])) {
-                return false;
+            if (fnName in fn) {
+                if (!fn[fnName](data, query[key], query)) {
+                    return false;
+                }
+            } else {
+                if (!match(data[key], query[key])) {
+                    return false;
+                }
             }
         }
+        return true;
     }
-    return true;
-}
 
+    return query === data;
+}
