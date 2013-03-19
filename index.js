@@ -65,6 +65,15 @@ var fn = {
 
     $not: function (obj, condition) {
         return !match(obj, condition);
+    },
+
+    $or: function (obj, conditions) {
+        for (var i = 0; i < conditions.length; i++) {
+            if (match(obj, conditions[i])){
+                return true;
+            }
+        }
+        return false;
     }
 
 };

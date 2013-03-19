@@ -132,4 +132,18 @@ describe('qry', function () {
         query({example: 5}).should.be.true;
         query({example: 2}).should.be.false;
     });
+
+    it('$or', function () {
+
+        var query = qry({
+            $or: [
+                {example: {$lt: 3}},
+                {example: {$gt: 10}}
+            ]
+        });
+
+        query({example: 11}).should.be.true;
+        query({example: 2}).should.be.true;
+        query({example: 5}).should.be.false;
+    });
 });
