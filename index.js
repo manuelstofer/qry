@@ -74,6 +74,10 @@ var fn = {
             }
         }
         return false;
+    },
+
+    $exists: function (obj, mustExist) {
+        return (typeof obj !== 'undefined') === mustExist;
     }
 
 };

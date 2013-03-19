@@ -146,4 +146,21 @@ describe('qry', function () {
         query({example: 2}).should.be.true;
         query({example: 5}).should.be.false;
     });
+
+    it('$exists', function () {
+        var query = qry({
+           example: {$exists: true}
+        });
+
+        query({example: 11}).should.be.true;
+        query({}).should.be.false;
+
+        query = qry({
+            example: {$exists: false}
+        });
+
+        query({example: false}).should.be.false;
+        query({}).should.be.true;
+
+    });
 });
