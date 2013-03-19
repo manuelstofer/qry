@@ -104,4 +104,13 @@ describe('qry', function () {
         query({example: 1}).should.be.false;
         query({example: 2}).should.be.true;
     });
+
+    it('$nin', function () {
+        var query = qry({example: {$nin: [undefined]}});
+        query({}).should.be.true;
+
+        var query = qry({example: {$nin: [1,2,3]}});
+        query({example: 2}).should.be.false;
+        query({example: 5}).should.be.true;
+    });
 });

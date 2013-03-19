@@ -38,7 +38,13 @@ var fn = {
 
     $ne: function (obj, value) {
         return obj !== value;
+    },
+
+    $nin: function (obj, value) {
+        if (typeof obj === 'undefined') return true;
+        return value.indexOf(obj) === -1;
     }
+
 };
 
 function createQuery (query) {
@@ -79,7 +85,7 @@ function match (data, query) {
                 return false;
             }
         } else {
-            if (!(key in data) || !match(data[key], query[key])) {
+            if (!match(data[key], query[key])) {
                 return false;
             }
         }
