@@ -1,5 +1,4 @@
 /*global describe, it, io*/
-'use strict';
 var chai = require('chai'),
     qry = require('../');
 chai.should();
@@ -191,5 +190,37 @@ describe('qry', function () {
         query({example: 'Hello bla'}).should.be.true;
         query({example: 'hello'}).should.be.true;
         query({example: 'bla'}).should.be.false;
+    });
+
+    it('$where', function () {
+        var query = qry({
+            $where: function () { return this.x === 2; }
+        });
+        query({x: 2}).should.be.true;
+        query({x: 3}).should.be.false;
+    });
+
+    it('$where (obj)', function () {
+        var query = qry({
+            $where: function () { return obj.x === 2; }
+        });
+        query({x: 2}).should.be.true;
+        query({x: 3}).should.be.false;
+    });
+
+    it('$where (str)', function () {
+        var query = qry({
+            $where: 'return this.x === 2;'
+        });
+        query({x: 2}).should.be.true;
+        query({x: 3}).should.be.false;
+    });
+
+    it('$where (str, obj)', function () {
+        var query = qry({
+            $where: 'return this.x === 2;'
+        });
+        query({x: 2}).should.be.true;
+        query({x: 3}).should.be.false;
     });
 });

@@ -93,6 +93,14 @@ var fn = {
 
     $options: function () {
         return true;
+    },
+
+    $where: function (obj, fn) {
+        if (typeof fn === 'function') {
+            fn = 'return (' + fn.toString() + ').call(this);'
+        }
+        fn = new Function('obj', fn);
+        return !!fn.call(obj, obj);
     }
 
 };
