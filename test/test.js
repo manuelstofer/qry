@@ -125,15 +125,11 @@ describe('qry', function () {
         query({example: 10}).should.be.false;
     });
 
-    it('$nor', function () {
+    it('$not', function () {
         var query = qry({
-            $nor: [
-                {example: {$lt: 3}},
-                {example: {$gt: 10}}
-            ]
+            $not: {example: {$lt: 3}}
         });
-        query({example: 6}).should.be.true;
+        query({example: 5}).should.be.true;
         query({example: 2}).should.be.false;
-        query({example: 11}).should.be.false;
     });
 });

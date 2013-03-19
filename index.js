@@ -61,6 +61,10 @@ var fn = {
             }
         }
         return true;
+    },
+
+    $not: function (obj, condition) {
+        return !match(obj, condition);
     }
 
 };
