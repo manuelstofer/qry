@@ -1,0 +1,12 @@
+{
+  "name": "qry",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "dependencies": {
+  },
+  "scripts": [
+    "index.js"
+  ],
+  "license": "MIT"
+}
