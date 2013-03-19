@@ -110,6 +110,10 @@ var fn = {
             }
         }
         return false;
+    },
+
+    $size: function (array, length) {
+        return array.length === length;
     }
 
 };

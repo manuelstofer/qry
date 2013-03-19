@@ -230,4 +230,10 @@ describe('qry', function () {
         query({array: [{value1: 1, value2: 0}, {value1: 1, value2: 2}]}).should.be.true;
     });
 
+    it('$size', function () {
+        var query = qry({array: {$size: 2}});
+        query({array: [1,2]}).should.be.true;
+        query({array: [1,2,3]}).should.be.false;
+    });
+
 });
