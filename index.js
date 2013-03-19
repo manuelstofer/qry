@@ -101,6 +101,15 @@ var fn = {
         }
         fn = new Function('obj', fn);
         return !!fn.call(obj, obj);
+    },
+
+    $elemMatch: function (array, query) {
+        for (var i = 0; i < array.length; i++) {
+            if (match(array[i], query)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 };

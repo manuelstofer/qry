@@ -223,4 +223,11 @@ describe('qry', function () {
         query({x: 2}).should.be.true;
         query({x: 3}).should.be.false;
     });
+
+    it('$elemMatch', function () {
+        var query = qry({array: { $elemMatch: {value1: 1, value2: {$gt: 1}}}});
+        query({array: [{value1: 1, value2: 0}, {value1: 2, value2: 2}]}).should.be.false;
+        query({array: [{value1: 1, value2: 0}, {value1: 1, value2: 2}]}).should.be.true;
+    });
+
 });
