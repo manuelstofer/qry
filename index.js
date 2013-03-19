@@ -20,6 +20,10 @@ var fn = {
         return obj > value;
     },
 
+    $gte: function (obj, value) {
+        return obj >= value;
+    },
+
     $lt: function (obj, value) {
         return obj < value;
     }
