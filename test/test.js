@@ -86,4 +86,9 @@ describe('qry', function () {
         query({example: 0.9}).should.be.false;
     });
 
+    it('$in', function () {
+        var query = qry({example: {$in: [1,2,3]}});
+        query({example: 1}).should.be.true;
+        query({example: 1.5}).should.be.false;
+    });
 });

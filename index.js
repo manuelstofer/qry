@@ -24,6 +24,10 @@ var fn = {
         return obj >= value;
     },
 
+    $in: function (obj, value) {
+        return value.indexOf(obj) !== -1;
+    },
+
     $lt: function (obj, value) {
         return obj < value;
     }
