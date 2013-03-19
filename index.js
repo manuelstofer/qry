@@ -78,6 +78,12 @@ var fn = {
 
     $exists: function (obj, mustExist) {
         return (typeof obj !== 'undefined') === mustExist;
+    },
+
+    $mod: function (obj, div) {
+        var divisor = div[0],
+            remainder = div[1];
+        return obj % divisor === remainder;
     }
 
 };

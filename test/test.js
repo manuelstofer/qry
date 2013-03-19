@@ -163,4 +163,13 @@ describe('qry', function () {
         query({}).should.be.true;
 
     });
+
+    it('$mod', function () {
+        var query = qry({
+            example: {$mod: [4, 1]}
+        });
+
+        query({example: 5}).should.be.true;
+        query({example: 4}).should.be.false;
+    });
 });
