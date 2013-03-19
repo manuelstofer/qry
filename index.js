@@ -30,6 +30,10 @@ var fn = {
 
     $lt: function (obj, value) {
         return obj < value;
+    },
+
+    $lte: function (obj, value) {
+        return obj <= value;
     }
 };
 

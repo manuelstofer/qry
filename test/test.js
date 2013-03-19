@@ -91,4 +91,11 @@ describe('qry', function () {
         query({example: 1}).should.be.true;
         query({example: 1.5}).should.be.false;
     });
+
+    it('$lte', function () {
+        var query = qry({example: {$lte: 1}});
+        query({example: 1.1}).should.be.false;
+        query({example: 1}).should.be.true;
+        query({example: 0.9}).should.be.true;
+    });
 });
