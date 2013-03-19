@@ -113,4 +113,15 @@ describe('qry', function () {
         query({example: 2}).should.be.false;
         query({example: 5}).should.be.true;
     });
+
+    it('$and', function () {
+        var query = qry({
+            $and: [
+                {example: {$gt: 3}},
+                {example: {$lt: 10}}
+            ]
+        });
+        query({example: 5}).should.be.true;
+        query({example: 10}).should.be.false;
+    });
 });

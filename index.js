@@ -43,6 +43,15 @@ var fn = {
     $nin: function (obj, value) {
         if (typeof obj === 'undefined') return true;
         return value.indexOf(obj) === -1;
+    },
+
+    $and: function (obj, conditions) {
+        for (var i = 0; i < conditions.length; i++) {
+           if (!match(obj, conditions[i])){
+               return false;
+           }
+        }
+        return true;
     }
 
 };
