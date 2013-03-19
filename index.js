@@ -34,6 +34,10 @@ var fn = {
 
     $lte: function (obj, value) {
         return obj <= value;
+    },
+
+    $ne: function (obj, value) {
+        return obj !== value;
     }
 };
 

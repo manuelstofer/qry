@@ -98,4 +98,10 @@ describe('qry', function () {
         query({example: 1}).should.be.true;
         query({example: 0.9}).should.be.true;
     });
+
+    it('$ne', function () {
+        var query = qry({example: {$ne: 1}});
+        query({example: 1}).should.be.false;
+        query({example: 2}).should.be.true;
+    });
 });
