@@ -172,4 +172,24 @@ describe('qry', function () {
         query({example: 5}).should.be.true;
         query({example: 4}).should.be.false;
     });
+
+    it('$regex', function () {
+        var query = qry({
+            example: {$regex: '^hello', $options: 'i'}
+        });
+
+        query({example: 'Hello bla'}).should.be.true;
+        query({example: 'hello'}).should.be.true;
+        query({example: 'bla'}).should.be.false;
+    });
+
+    it('$regex (native)', function () {
+        var query = qry({
+            example: /^hello/i
+        });
+
+        query({example: 'Hello bla'}).should.be.true;
+        query({example: 'hello'}).should.be.true;
+        query({example: 'bla'}).should.be.false;
+    });
 });

@@ -84,6 +84,15 @@ var fn = {
         var divisor = div[0],
             remainder = div[1];
         return obj % divisor === remainder;
+    },
+
+    $regex: function (obj, regex, query) {
+        var options = query.$options;
+        return (new RegExp(regex, options)).test(obj);
+    },
+
+    $options: function () {
+        return true;
     }
 
 };
@@ -95,10 +104,15 @@ function createQuery (query) {
 }
 
 function isEqualQuery (query) {
-    return query instanceof Array || typeof query !== 'object';
+    return query instanceof Array || typeof query !== 'object' || query instanceof RegExp;
 }
 
 function isEqual (data, query) {
+
+    if (query instanceof RegExp) {
+        return query.test(data);
+    }
+
     if (query instanceof Array) {
         if (!(data instanceof Array)) return false;
         if (data.length !== query.length) return false;
@@ -122,7 +136,7 @@ function match (data, query) {
         var fnName = key;
 
         if (fnName in fn) {
-            if (!fn[fnName](data, query[key])) {
+            if (!fn[fnName](data, query[key], query)) {
                 return false;
             }
         } else {
