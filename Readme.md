@@ -31,7 +31,7 @@ match({name: 'example', qty: 10, price: 65.10});    // -> true
 match({name: 'bla', qty: 10, price: 30.10});        // -> false
 ```
 
-Please checkout [query selector](http://docs.mongodb.org/manual/reference/operators/#query-selectors) section
+Please checkout the [query selector](http://docs.mongodb.org/manual/reference/operators/#query-selectors) section
 in the mongo db reference.
 
 
