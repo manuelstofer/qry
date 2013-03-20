@@ -37,6 +37,12 @@ in the mongo db reference.
 
 ### Supported operators
 
+- All comparison operators
+- All logical operators
+- All element operators except $type
+- All JavaScript operators
+- All array operators
+
 Following operators are currently not supported:
 
 - All geospatial operators
