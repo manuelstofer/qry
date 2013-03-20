@@ -236,4 +236,19 @@ describe('qry', function () {
         query({array: [1,2,3]}).should.be.false;
     });
 
+    it('example', function () {
+
+        var match = qry({
+            name: {$exists: true},
+            qty: {$gt: 3},
+            $and: [
+                {price: {$lt: 100}},
+                {price: {$gt: 50}}
+            ]
+        });
+
+        match({name: 'example', qty: 10, price: 65.10}).should.be.true;
+        match({name: 'example', qty: 10, price: 30.10}).should.be.false;
+    })
+
 });
