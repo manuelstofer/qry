@@ -1,3 +1,4 @@
+/*global module*/
 'use strict';
 
 module.exports = createQuery;
@@ -6,10 +7,21 @@ var defaults = {
     $where: false
 };
 
+/**
+ * Creates an match function to test objects against a mongodb query
+ *
+ * @param query
+ * @param options
+ * @returns {Function}
+ */
 function createQuery (query, options) {
 
     options = options || defaults;
 
+    /**
+     * Match functions
+     * @see http://docs.mongodb.org/manual/reference/operators/#query-selectors
+     */
     var fn = {
 
         $all: function (obj, value) {
@@ -49,7 +61,7 @@ function createQuery (query, options) {
         },
 
         $nin: function (obj, value) {
-            if (typeof obj === 'undefined') return true;
+            if (typeof obj === 'undefined') { return true; }
             return value.indexOf(obj) === -1;
         },
 
@@ -109,7 +121,7 @@ function createQuery (query, options) {
             }
 
             if (typeof fn === 'function') {
-                fn = 'return (' + fn.toString() + ').call(this);'
+                fn = 'return (' + fn.toString() + ').call(this);';
             }
             fn = new Function('obj', fn);
             return !!fn.call(obj, obj);
@@ -130,45 +142,82 @@ function createQuery (query, options) {
 
     };
 
-    function match (data, query) {
-
-        if (query instanceof RegExp) {
-            return query.test(data);
-        }
-
-        if (query instanceof Array) {
-            if (!(data instanceof Array)) return false;
-            if (data.length !== query.length) return false;
-            for (var i = 0; i < query.length; i++) {
-                if (data[i] !== query[i]) {
-                    return false;
-                }
+    /***
+     * Tests if obj is equal to query
+     * @todo deep test
+     *
+     * @param obj
+     * @param query
+     * @returns {boolean}
+     */
+    function matchArray (obj, query) {
+        if (!(obj instanceof Array)) { return false; }
+        if (obj.length !== query.length) { return false; }
+        for (var i = 0; i < query.length; i++) {
+            if (obj[i] !== query[i]) {
+                return false;
             }
-            return true;
         }
+        return true;
+    }
 
-        if (typeof query === 'object') {
-            for (var key in query) {
-                if (query.hasOwnProperty(key)) {
-                    var fnName = key;
-                    if (fnName in fn) {
-                        if (!fn[fnName](data, query[key], query)) {
-                            return false;
-                        }
-                    } else {
-                        if (!match(data[key], query[key])) {
-                            return false;
-                        }
+    /**
+     * Tests an object against an object query
+     * - Does not include regexp and equal tests
+     *
+     * @param obj
+     * @param query
+     * @returns {boolean}
+     */
+    function matchQueryObject (obj, query) {
+        for (var key in query) {
+            if (query.hasOwnProperty(key)) {
+                var fnName = key;
+                if (fnName in fn) {
+
+                    // runs the match function
+                    if (!fn[fnName](obj, query[key], query)) {
+                        return false;
+                    }
+
+                } else {
+
+                    // recursive run match for an attribute
+                    if (!match(obj[key], query[key])) {
+                        return false;
                     }
                 }
             }
-            return true;
         }
-
-        return query === data;
+        return true;
     }
 
-    return function (data) {
-        return match(data, query);
+    /**
+     * Tests an object against a mongodb query
+     *
+     * @param obj
+     * @param query
+     * @returns {*}
+     */
+    function match (obj, query) {
+
+        if (query instanceof RegExp) {
+            return query.test(obj);
+        }
+
+        if (query instanceof Array) {
+            return matchArray(obj, query);
+        }
+
+        if (typeof query === 'object') {
+            return matchQueryObject(obj, query);
+        }
+
+        return query === obj;
+    }
+
+    // return the match function
+    return function (obj) {
+        return match(obj, query);
     };
 }
