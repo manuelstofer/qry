@@ -1,16 +1,15 @@
 {
     "name": "qry",
     "version": "0.0.1",
-    "description": "",
-    "keywords": [],
+    "description": "MongoDB query compatible object match",
+    "keywords": ["query", "test", "match", "mongo", "db", "mongodb"],
     "license": "MIT",
     "author": "Manuel Stofer <manuel@takimata.ch>",
     "dependencies": {},
     "devDependencies": {
         "mocha": "*",
         "chai": "*",
-        "component": "*",
-        "mocha-phantomjs": "*"
+        "component": "*"
     },
     "scripts": {
         "test": "make test"
