@@ -195,7 +195,7 @@ describe('qry', function () {
     it('$where', function () {
         var query = qry({
             $where: function () { return this.x === 2; }
-        });
+        }, {$where: true});
         query({x: 2}).should.be.true;
         query({x: 3}).should.be.false;
     });
@@ -203,7 +203,7 @@ describe('qry', function () {
     it('$where (obj)', function () {
         var query = qry({
             $where: function () { return obj.x === 2; }
-        });
+        }, {$where: true});
         query({x: 2}).should.be.true;
         query({x: 3}).should.be.false;
     });
@@ -211,7 +211,7 @@ describe('qry', function () {
     it('$where (str)', function () {
         var query = qry({
             $where: 'return this.x === 2;'
-        });
+        }, {$where: true});
         query({x: 2}).should.be.true;
         query({x: 3}).should.be.false;
     });
@@ -219,7 +219,7 @@ describe('qry', function () {
     it('$where (str, obj)', function () {
         var query = qry({
             $where: 'return this.x === 2;'
-        });
+        }, {$where: true});
         query({x: 2}).should.be.true;
         query({x: 3}).should.be.false;
     });
