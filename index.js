@@ -149,15 +149,16 @@ function createQuery (query, options) {
 
         if (typeof query === 'object') {
             for (var key in query) {
-                var fnName = key;
-
-                if (fnName in fn) {
-                    if (!fn[fnName](data, query[key], query)) {
-                        return false;
-                    }
-                } else {
-                    if (!match(data[key], query[key])) {
-                        return false;
+                if (query.hasOwnProperty(key)) {
+                    var fnName = key;
+                    if (fnName in fn) {
+                        if (!fn[fnName](data, query[key], query)) {
+                            return false;
+                        }
+                    } else {
+                        if (!match(data[key], query[key])) {
+                            return false;
+                        }
                     }
                 }
             }
@@ -171,5 +172,3 @@ function createQuery (query, options) {
         return match(data, query);
     };
 }
-
-
