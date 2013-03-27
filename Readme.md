@@ -1,5 +1,5 @@
 # qry
-![Build status](https://api.travis-ci.org/manuelstofer/qry.png)
+[![Build Status](https://travis-ci.org/manuelstofer/qry.png?branch=master)](https://travis-ci.org/manuelstofer/qry)
 
 MongoDB query compatible object match
 
