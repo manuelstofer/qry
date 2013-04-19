@@ -143,6 +143,20 @@ function createQuery (query, options) {
     };
 
     /***
+     * Finds values of nested objects using dot-notation keys
+     * @todo deep test
+     *
+     * @param obj
+     * @param key
+     * @returns {*}
+     */
+    function getDotNotationProp (obj, key) {
+        var parts = key.split('.');
+        while (parts.length && (obj = obj[parts.shift()]));
+        return obj;
+    }
+
+    /***
      * Tests if obj is equal to query
      * @todo deep test
      *
@@ -172,7 +186,9 @@ function createQuery (query, options) {
     function matchQueryObject (obj, query) {
         for (var key in query) {
             if (query.hasOwnProperty(key)) {
-                var fnName = key;
+                var fnName = key,
+                    value;
+
                 if (fnName in fn) {
 
                     // runs the match function
@@ -181,9 +197,13 @@ function createQuery (query, options) {
                     }
 
                 } else {
+                    value = obj[key];
+                    if (key.indexOf('.') !== -1) { 
+                        value = getDotNotationProp(obj, key);
+                    }
 
                     // recursive run match for an attribute
-                    if (!match(obj[key], query[key])) {
+                    if (!match(value, query[key])) {
                         return false;
                     }
                 }
