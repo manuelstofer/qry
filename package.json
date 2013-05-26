@@ -7,7 +7,7 @@
     "author": "Manuel Stofer <manuel@takimata.ch>",
     "dependencies": {},
     "devDependencies": {
-        "mocha": "*",
+        "mocha": "1.9.0",
         "chai": "*",
         "component": "*"
     },
