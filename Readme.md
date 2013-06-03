@@ -31,7 +31,7 @@ match({name: 'example', qty: 10, price: 65.10});    // -> true
 match({name: 'bla', qty: 10, price: 30.10});        // -> false
 ```
 
-Please checkout the [query selector](http://docs.mongodb.org/manual/reference/operators/#query-selectors) section
+Please check out the [query selector](http://docs.mongodb.org/manual/reference/operators/#query-selectors) section
 in the mongo db reference.
 
 
@@ -43,7 +43,7 @@ in the mongo db reference.
 - All JavaScript operators
 - All array operators
 
-Following operators are currently not supported:
+The following operators are currently not supported:
 
 - All geospatial operators
 - $type operator
