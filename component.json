@@ -1,6 +1,6 @@
 {
   "name": "qry",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "MongoDB query compatible object match",
   "keywords": ["query", "test", "match", "mongo", "db", "mongodb"],
   "dependencies": {
