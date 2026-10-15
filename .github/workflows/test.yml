@@ -22,15 +22,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
       - name: Check code style
-        run: yarn run format:check
+        run: pnpm run format:check
       - name: Run linter
-        run: yarn run lint
+        run: pnpm run lint
       - name: Build
-        run: yarn run build
+        run: pnpm run build
       - name: Run tests
-        run: yarn run test:coverage
+        run: pnpm run test --coverage
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         with:

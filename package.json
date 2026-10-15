@@ -30,7 +30,6 @@
     "format": "prettier --write './src'",
     "format:check": "prettier --check './src'",
     "test": "vitest",
-    "test:coverage": "vitest --coverage",
     "prebuild": "$npm_execpath run clean",
     "prepack": "$npm_execpath run build"
   },
@@ -47,5 +46,5 @@
     "vite": "^8.3.4",
     "vitest": "^5.0.3"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "pnpm@12.3.4+sha512.961aa41fb077da3a04a441d9f8e15ebc0c96da8ef710b2eb67bf9ee7cb0610eabd48f1fd85f51cffe73846785fa0f87c56a3a872a1d893f8446741b5cce45457"
 }
